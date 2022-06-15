@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 10px 10px 10px;
+    border: 1px solid black;
+}
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    border: 1px solid black;
+    padding: 5px 15px;
+}
+.description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    border: 1px solid black;
+    padding: 5px 15px;
+}
+.comments_list {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    border: 1px solid black;
+    padding: 5px 15px;
+    margin-bottom: 7px;
+    list-style: none;
+}
+.textarea_comment {
+    min-height: 50px;
+    border: 1px solid black;
+    padding: 5px 5px;
+}
+h3 {
+    display: flex;
+    align-self: center;
+    margin-top: 10px;
+    margin-bottom: 7px;
+    font-size: x-large;
+}
+.description_item {
+    display: flex;
+    align-self: flex-start;
+}
+.btn {
+    margin-top: 15px;
+    padding: 5px;
+    width: 300px;
+    align-self: center;
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+/*.title {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    max-width: 100%;*/
+/*    min-height: fit-content;*/
+/*    border: 2px solid darkgray;*/
+/*    border-radius: 3px;*/
+/*    padding: 5px 15px;*/
+/*}*/
+
+/*.description {*/
+/*    display: flex;*/
+/*    max-width: 100%;*/
+/*    min-height: fit-content;*/
+/*    border: 2px solid darkgray;*/
+/*    border-radius: 3px;*/
+/*    padding: 0px 15px;*/
+/*}*/
+
+/*.comments {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    max-width: 100%;*/
+/*    min-height: fit-content;*/
+/*    border: 2px solid darkgray;*/
+/*    border-radius: 3px;*/
+/*    padding: 5px 15px;*/
+/*    margin-bottom: 7px;*/
+/*}*/
+
+/*.addComment {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
+
+/*.textComment {*/
+/*    min-height: 8vh;*/
+/*    border: 2px solid darkgray;*/
+/*    border-radius: 3px;*/
+/*    padding: 3px 5px;*/
+/*}*/
+
+/*h2 {*/
+/*    display: flex;*/
+/*    align-self: center;*/
+/*}*/
+
+/*h3 {*/
+/*    display: flex;*/
+/*    align-self: center;*/
+/*}*/
+
+/*p {*/
+/*    display: flex;*/
+/*    align-self: flex-start;*/
+/*}*/
+
+/*.button {*/
+/*    margin-top: 10px;*/
+/*    width: 200px;*/
+/*    align-self: center;*/
+/*}*/
+
+/*.button:hover {*/
+/*    cursor: pointer;*/
+/*    background-color: gray;*/
+/*    color: honeydew;*/
+/*    box-shadow: 0px 0px 5px 3px orange;*/
+/*    border-radius: 3px;*/
+/*}*/
