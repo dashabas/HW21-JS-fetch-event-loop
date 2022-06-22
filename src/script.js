@@ -8,9 +8,11 @@ class Post {
     constructor(id, postId) {
         this.id = id;
         this.postId = postId;
-        addCommentBtn.addEventListener('click', (event) => {
-            if (event.target.dataset.action === 'add_comment' && newCommentInput.value !== '') {
-                this.addComment(newCommentInput.value);
+        this.receivedPost = {};
+        this.comments = [];
+        addCommentBtn.addEventListener('click', () => {
+            if (newCommentInput.value !== '') {
+                this.addNewComment(newCommentInput.value);
                 newCommentInput.value = '';
             }
         })
@@ -25,6 +27,18 @@ class Post {
         }
     }
 
+    async getDataOnPage() {
+        try {
+            this.receivedPost = await this.getPost();
+            await this.renderPost(this.receivedPost);
+            this.comments = await this.getComments();
+            await this.renderComments(this.comments);
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
     async getComments() {
         const comments = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${this.id}`);
         if (comments.ok) {
@@ -34,28 +48,31 @@ class Post {
         }
     }
 
-    async render() {
-        try {
-            let receivedPost = await this.getPost();
-            title.innerHTML += `<h4 data-id="${receivedPost.id}">${receivedPost.title}</h4>`;
-            description.innerHTML += `<p class="description_item" data-id="${receivedPost.id}">${receivedPost.body}</p>`;
-            let receivedComments = await this.getComments();
-                    let list = '';
-                    for (let el of receivedComments) {
-                        if (!el) {
-                            return;
-                        }
-                        list += `<li>- ${el.body}</li>`;
-                    }
-                    listOfComments.innerHTML = list;
-        } catch (error) {
-            console.log(error);
-        }
+    renderPost(receivedPost) {
+        title.innerHTML += `<h4 data-id="${receivedPost.id}">${receivedPost.title}</h4>`;
+        description.innerHTML += `<p class="description_item" data-id="${receivedPost.id}">${receivedPost.body}</p>`;
     }
 
-    async addComment(data) {
+    renderComments(receivedComments) {
+        let list = '';
+        for (let el of receivedComments) {
+            if (!el) {
+                return;
+            }
+            list += `<li>- ${el.body}</li>`;
+        }
+        listOfComments.innerHTML = list;
+    }
+
+    renderNewComment(data) {
+        let newComment = document.createElement('li');
+        newComment.innerHTML = `- ${data.body}`
+        listOfComments.append(newComment);
+    }
+
+    async addNewComment(data) {
         try {
-            await fetch(`https://jsonplaceholder.typicode.com/comments`, {
+            let dataComment = await fetch(`https://jsonplaceholder.typicode.com/comments`, {
                 method: 'POST',
                 body: JSON.stringify({
                     postId: this.postId,
@@ -65,12 +82,8 @@ class Post {
                     'Content-type': 'application/json; charset=UTF-8',
                 },
             })
-                .then((comment) => comment.json())
-                .then((comment) => {
-                    let newComment = document.createElement('li');
-                    newComment.innerHTML = `- ${comment.body}`
-                    listOfComments.append(newComment);
-                });
+            let comment = await dataComment.json();
+            await this.renderNewComment(comment);
         } catch (error) {
             console.log(error);
         }
@@ -78,7 +91,7 @@ class Post {
 }
 
 const postOne = new Post(1, 1);
-postOne.render();
+postOne.getDataOnPage();
 
 
 console.log(1);
